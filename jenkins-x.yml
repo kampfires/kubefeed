@@ -7,10 +7,10 @@ pipelineConfig:
         steps:
         - command: echo 'This pipeline will now execute "kubectl apply -f manifests/" to declaratively apply any diffs in manifests/*.yaml to the targeted kubernetes cluster '
         steps:
-        - command: git clone https://REPLACE_ME_GIT_PROVIDER/REPLACE_ME_ORG/REPLACE_ME_APP_NAME.git
+        - command: git clone https://github.com/kampfires/kubefeed.git
           name: clone-app-git-directory
         steps:
-        - command: cd REPLACE_ME_APP_NAME
+        - command: cd kubefeed
           name: cd-app-git-directory
         steps:
         - command: kubectl apply -f manifests/
