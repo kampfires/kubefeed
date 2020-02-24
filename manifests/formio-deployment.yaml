@@ -1,0 +1,49 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.20.0 (f3d54d784)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: formio
+  name: formio
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.20.0 (f3d54d784)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: formio
+    spec:
+      containers:
+      - env:
+        - name: DEBUG
+          value: formio:*
+        - name: NODE_CONFIG
+          value: '{"mongo": "mongodb://mongo:27017/formio"}'
+        - name: ROOT_EMAIL
+          value: admin@example.com
+        - name: ROOT_PASSWORD
+          value: CHANGEME
+        image: formio
+        name: formio
+        ports:
+        - containerPort: 3001
+        resources: {}
+        stdin: true
+        tty: true
+        volumeMounts:
+        - mountPath: /app
+          name: formio-claim0
+      restartPolicy: Always
+      volumes:
+      - name: formio-claim0
+        persistentVolumeClaim:
+          claimName: formio-claim0
+status: {}
