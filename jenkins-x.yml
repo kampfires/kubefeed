@@ -13,6 +13,12 @@ pipelineConfig:
         - command: cd kubefeed
           name: cd-app-git-directory
         steps:
+        - command: kubectl delete -f delete/
+          name: kubectl-delete-f-delete
+        steps:
+        - command: rm delete/*
+          name: delete-deleted-manifests 
+        steps:
         - command: kubectl apply -f manifests/
           name: kubectl-apply-f-manifests
     release:
