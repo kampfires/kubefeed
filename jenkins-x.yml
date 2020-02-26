@@ -4,5 +4,8 @@ pipelineConfig:
     pullRequest:
       preBuild:
         steps:
-        - command: cd /workspace/kubefeed
-        - command: echo "$(pwd)"
+        - command: pwd
+      build:
+        replace: true
+        steps:
+        - command: echo noodle
