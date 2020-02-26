@@ -4,7 +4,7 @@ pipelineConfig:
     pullRequest:
       preBuild:
         steps:
-        - command: pwd
+        - command: ls
       build:
         replace: true
         steps:
