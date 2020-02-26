@@ -7,7 +7,9 @@ pipelineConfig:
         steps:
         - sh: export BRANCH_NAME=$BRANCH_NAME
           name: export-branch-name
-        - dir: /workspace/kubefeed
+        - command: git clone https://github.com/kampfires/kubefeed.git -b $BRANCH_NAME
+          name: clone-app-git-directory        
+        - dir: ./kubefeed
           steps:
           - command: bash pipelinescripts/post-pr-run.sh
             name: bash-pipelinescripts-post-pr-run-sh
@@ -15,3 +17,5 @@ pipelineConfig:
             steps:          
             - command: bash pipelinescripts/mergetopr.sh
               name: bash-pipelinescripts-mergetopr-sh
+            - command: bash pipelinescripts/post-merge-run.sh
+              name: bash-pipelinescripts-post-merge-run-sh
