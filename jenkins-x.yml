@@ -5,7 +5,7 @@ pipelineConfig:
       build:
         replace: true
         steps:
-        - command: git clone https://github.com/kampfires/kubefeed.git
+        - command: git clone https://github.com/kampfires/kubefeed.git -b $BRANCH_NAME
           name: clone-app-git-directory
         steps:
         - command: cd kubefeed
@@ -16,6 +16,9 @@ pipelineConfig:
         steps:
         - command: rm delete/*
           name: delete-deleted-manifests 
+        steps:
+        - command: jx create pullrequest -b --base $BRANCH_NAME --push=true --title "post-pr-script-repo-updates-merge"
+          name: kubectl-apply-f-manifests
         steps:
         - command: kubectl apply -f manifests/
           name: kubectl-apply-f-manifests
