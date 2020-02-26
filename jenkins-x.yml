@@ -5,17 +5,5 @@ pipelineConfig:
       build:
         replace: true
         steps:
-        - sh: echo $RELEASE_VERSION
+        - sh: echo $VERSION
           name: export-branch-name
-        - sh: git clone https://github.com/kampfires/kubefeed.git -b $BRANCH_NAME
-          name: clone-app-git-directory        
-        - dir: ./kubefeed
-          steps:
-          - sh:  pipelinescripts/post-pr-run.sh
-            name: pipelinescripts-post-pr-run-sh
-          - dir: /workspace/kubefeed/kubefeed
-            steps:          
-            - sh: pipelinescripts/mergetopr.sh
-              name: pipelinescripts-mergetopr-sh
-            - sh: pipelinescripts/post-merge-run.sh
-              name: pipelinescripts-post-merge-run-sh
