@@ -4,5 +4,5 @@ pipelineConfig:
     pullRequest:
       preBuild:
         steps:
-        - command: cd /workloads/kubefeed
+        - command: cd /workspace/kubefeed
         - command: echo "$(pwd)"
