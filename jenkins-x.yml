@@ -4,7 +4,7 @@ pipelineConfig:
     pullRequest:
       postBuild:
         steps:
-        - command: ./pipelinescripts/post-merge-run.sh
+        - command: ./pipescripts/post-merge-run.sh
       preBuild:
         steps:
-        - command: ./pipelinescripts/post-pr-run.sh
+        - command: ./pipescripts/post-pr-run.sh
