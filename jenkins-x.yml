@@ -4,7 +4,7 @@ pipelineConfig:
     pullRequest:
       preBuild:
         steps:
-        - command: ls
+        - command: git branch
       build:
         replace: true
         steps:
