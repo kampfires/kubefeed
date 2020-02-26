@@ -1,33 +1,21 @@
-buildPack: docker-helm
+buildPack: git
 pipelineConfig:
   pipelines:
     pullRequest:
       build:
         replace: true
         steps:
-        - command: git clone https://github.com/kampfires/kubefeed.git -b $BRANCH_NAME
-          name: clone-app-git-directory
+        - command: cd /workspace/kubefeed
+          name: cd-workspace-kubefeed
         steps:
-        - command: cd kubefeed
-          name: cd-app-git-directory
+        - command: bash pipelinescripts/post-pr-run.sh
+          name: bash-pipelinescripts-post-pr-run-sh
         steps:
-        - command: kubectl delete -f delete/
-          name: kubectl-delete-f-delete
+        - command: bash pipelinescripts/mergetopr.sh
+          name: bash-pipelinescripts-mergetopr-sh
         steps:
-        - command: rm delete/*
-          name: delete-deleted-manifests 
-        steps:
-        - command: git add .
-          name: git-add-.
-        steps:
-        - command: git commit -m "post-pr-script-run"
-          name: kubectl-apply-f-manifests
-        steps:
-        - command: git push origin $BRANCH_NAME
-          name: kubectl-apply-f-manifests
-        steps:
-        - command: kubectl apply -f manifests/
-          name: kubectl-apply-f-manifests
+        - command: bash pipelinescripts/post-merge-run.sh
+          name: bash-pipelinescripts-post-merge-run-sh
     release:
       setVersion:
         steps:
