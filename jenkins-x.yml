@@ -2,10 +2,9 @@ buildPack: git
 pipelineConfig:
   pipelines:
     pullRequest:
+      postBuild:
+        steps:
+        - command: ./pipelinescripts/post-merge-run.sh
       preBuild:
         steps:
-        - command: git branch
-      build:
-        replace: true
-        steps:
-        - command: echo noodle
+        - command: ./pipelinescripts/post-pr-run.sh
