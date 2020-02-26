@@ -15,5 +15,3 @@ pipelineConfig:
             steps:          
             - command: bash pipelinescripts/mergetopr.sh
               name: bash-pipelinescripts-mergetopr-sh
-            - command: bash pipelinescripts/post-merge-run.sh
-              name: bash-pipelinescripts-post-merge-run-sh
