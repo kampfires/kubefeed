@@ -5,27 +5,15 @@ pipelineConfig:
       build:
         replace: true
         steps:
-        - command: cd /workspace/kubefeed
-          name: cd-workspace-kubefeed
-        steps:
-        - command: bash pipelinescripts/post-pr-run.sh
-          name: bash-pipelinescripts-post-pr-run-sh
-        steps:
-        - command: bash pipelinescripts/mergetopr.sh
-          name: bash-pipelinescripts-mergetopr-sh
-        steps:
-        - command: bash pipelinescripts/post-merge-run.sh
-          name: bash-pipelinescripts-post-merge-run-sh
-    release:
-      setVersion:
-        steps:
-          - sh: jx step next-version --use-git-tag-only --tag
-            name: tag-with-new-version
-      build:
-        replace: true
-        steps:
-        - command: echo "This template does not build anything"
-      promote:
-        replace: true
-        steps:
-        - command: echo "This template does not need promotion"
+        - sh: export BRANCH_NAME=$BRANCH_NAME
+          name: export-branch-name
+        - dir: /workspace/kubefeed
+          steps:
+          - command: bash pipelinescripts/post-pr-run.sh
+            name: bash-pipelinescripts-post-pr-run-sh
+          - dir: /workspace/kubefeed/kubefeed
+            steps:          
+            - command: bash pipelinescripts/mergetopr.sh
+              name: bash-pipelinescripts-mergetopr-sh
+            - command: bash pipelinescripts/post-merge-run.sh
+              name: bash-pipelinescripts-post-merge-run-sh
