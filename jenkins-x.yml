@@ -1,9 +1,7 @@
-buildPack: git
 pipelineConfig:
   pipelines:
     pullRequest:
-      build:
-        replace: true
+      preBuild:
         steps:
-        - sh: echo $VERSION
-          name: export-branch-name
+        - command: cd /workloads/kubefeed
+        - command: echo "$(pwd)"
