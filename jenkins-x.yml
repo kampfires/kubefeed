@@ -8,3 +8,4 @@ pipelineConfig:
       setup:
         steps:
         - command: ./pipescripts/post-pr-run.sh
+        - command: env
