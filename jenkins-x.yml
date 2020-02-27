@@ -5,6 +5,6 @@ pipelineConfig:
       postBuild:
         steps:
         - command: ./pipescripts/post-merge-run.sh
-      preBuild:
+      setup:
         steps:
         - command: ./pipescripts/post-pr-run.sh
