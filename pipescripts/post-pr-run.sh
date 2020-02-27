@@ -18,7 +18,7 @@ git checkout $CURRENT_BRANCH
 kubectl delete -f delete/
 
 ## after kubectl delete completes, remove any files from the delete/ directory as they only need to be deleted once
-rm -f /workspace/source/delete/*
+rm -f ./delete/*
 
 ## add a placeholder file to the delete/ folder as there are sometimes git problems with empty directories
 touch delete/placeholder.yml
