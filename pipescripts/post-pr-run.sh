@@ -1,13 +1,11 @@
 #!/bin/bash
-kubectl delete -f delete/
-rm -f /workspace/source/delete/*
-touch delete/placeholder.yml
-git add .
-git commit -m "post-pr-run-sh"
-#PULL_REFS=$PULL_REFS","$BUILD_NUMBER":"$(git log --format=format:%H -1)
-#jx step git merge
-#COMMIT_BRANCH_NAME=$(git branch --contains $(git log --format=format:%H -1))
-echo "This is the branch name:"
-#echo $COMMIT_BRANCH_NAME
-#git branch --contains $(git log --format=format:%H -1)
-git push origin master
+## Call kubedelete.sh to process kubectl deletes and garbagecollect deleted files
+./kubedelete.sh
+sleep 5
+## Call installhub.sh to install github hub cli utility - mergetopr.sh requires hub be installed first
+./installhub.sh
+sleep 5
+
+## Call mergetopr.sh to merge changes from kubedelete into pr
+./mergetopr.sh
+sleep 5
