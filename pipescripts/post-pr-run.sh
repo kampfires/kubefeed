@@ -4,5 +4,5 @@ rm -f /workspace/source/delete/*
 touch delete/placeholder.yml
 git add .
 git commit -m "post-pr-run-sh"
-echo "the git remote v is:"
-git remote -v
+PULL_REFS=$PULL_REFS$(git log --format=format:%H -1)
+jx step git merge
