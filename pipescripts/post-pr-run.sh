@@ -12,4 +12,15 @@
 #./pipescripts/mergetopr.sh
 #sleep 5
 
-echo $PULL_REFS
+mkdir /workspace/pr$PULL_NUMBER
+git clone $SOURCE_URL
+cd $APP_NAME
+CURRENT_BRANCH=$(curl -s https://api.github.com/repos/$REPO_OWNER/$APP_NAME/pulls/$PULL_NUMBER |  jq -r '.head.ref')
+echo "CURRENT_BRANCH VALUE IS:"
+echo $CURRENT_BRANCH
+git fetch origin $CURRENT_BRANCH
+git checkout $CURRENT_BRANCH
+touch test.503
+git add .
+git commit -m "pr$PULLNUMBER"
+git push origin $CURRENT_BRANCH
