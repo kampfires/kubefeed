@@ -8,5 +8,6 @@ git commit -m "post-pr-run-sh"
 #jx step git merge
 #COMMIT_BRANCH_NAME=$(git branch --contains $(git log --format=format:%H -1))
 echo "This is the branch name:"
-echo $COMMIT_BRANCH_NAME
-git branch --contains $(git log --format=format:%H -1)
+#echo $COMMIT_BRANCH_NAME
+#git branch --contains $(git log --format=format:%H -1)
+git push origin master
