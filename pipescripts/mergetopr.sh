@@ -1,6 +1,6 @@
 #!/bin/bash
-cd $MYDIR
-hub pr $BUILD_NUMBER
+cd /workspace/source
+hub pr $BUILD_NUMBER -m
 git add .
 git commit -m "post-pr-run-sh"
 PRBRANCH='pr/'$BUILD_NUMBER
